@@ -44,8 +44,8 @@ The experiments in sections 4 and 5 are conducted using the SL-GCN.
 
 To reproduce the experiments using the SLGCN please install the following environment:
 
-''' Install environment SLGCN
-'''
+``` Install environment SLGCN
+```
 
 
 
@@ -53,7 +53,7 @@ To reproduce the experiments using the SLGCN please install the following enviro
 
 In order to run the code for the geometric model (Temporal-PONITA) described in Section 6 install the following conda environment
 
-''' Install environment for temporal-PONITA
+```Install environment for temporal-PONITA
 conda create --yes --name ponita python=3.10 numpy scipy matplotlib
 conda activate ponita
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia -y
@@ -61,7 +61,7 @@ conda install pyg==2.3.1 -c pyg -y
 pip3 install wandb
 pip3 install pytorch_lightning==1.8.6
 pip3 install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-1.13.1+cu117.html
-'''
+```
 
 
 
