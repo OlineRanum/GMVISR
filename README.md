@@ -10,7 +10,7 @@
 
 1. [Introduction](#introduction)
 2. [Dataset Description](#dataset-description)
-3. [Data Format and Structure](#data-format-and-structure)
+3. [SetUp](#SetUp)
 4. [Usage](#usage)
 5. [Evaluation](#evaluation)
 6. [Benchmarks and Baselines](#benchmarks-and-baselines)
@@ -33,6 +33,36 @@ To reproduce the experiments of the NGT200 paper please download the pose- and m
 - **Size**: 200 glosses, 4 unique signers, 3 views per video. (e.g., Number of samples, Total size in GB, etc.)
 - **Data Source**: Human signers (captured in Lab), Synthetic signer
 - **License**: CC BY 4.0
+
+## Experiments 
+
+### Reproduction of experiments Section 4 & 5 (Baseline)
+
+The experiments in sections 4 and 5 are conducted using the SL-GCN.
+
+#### SetUP
+
+To reproduce the experiments using the SLGCN please install the following environment:
+
+''' Install environment SLGCN
+'''
+
+
+
+### Reproduction of experiments Section 6 (Geometric)
+
+In order to run the code for the geometric model (Temporal-PONITA) described in Section 6 install the following conda environment
+
+''' Install environment for temporal-PONITA
+conda create --yes --name ponita python=3.10 numpy scipy matplotlib
+conda activate ponita
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia -y
+conda install pyg==2.3.1 -c pyg -y
+pip3 install wandb
+pip3 install pytorch_lightning==1.8.6
+pip3 install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-1.13.1+cu117.html
+'''
+
 
 
 ## License and Citation
