@@ -1,9 +1,7 @@
 wandb
 *.ckpt
 backup
-datasets/
 logs
-n_body_system/dataset/*.npy
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -14,10 +12,10 @@ __pycache__/
 *.so
 
 # Data
-datasets/isr/
-datasets/mnist/
-dataset/qm9/
- 
+data/Poses/
+src/models/temporal_ponita/datasets/
+src/models/temporal_ponita/
+
 # Distribution / packaging
 .Python
 build/
