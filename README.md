@@ -1,3 +1,6 @@
+
+### DEVELOPMENT OF REPO IN PROGRESS ---------------------------- Check back later.
+
 # The NGT200 Dataset: Geometric Multi-View Isolated Sign Recognition
 
 **Authors**: Oline Ranum, David Wessels, Gomer Otterspeer, Erik J Bekkers, Floris Roelofsen, Jari I. Andersen  
