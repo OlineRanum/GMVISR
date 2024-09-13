@@ -8,7 +8,7 @@ data:
         # Set Data paths
         OUTPUT_PATH: &output_path new_models/
         DATA_PATH: &data_path data/metadata_kfold/1_2_3/T1/metadata_fold_2.json
-        POSE_PATH: &pose_path data/Poses/
+        POSE_PATH: &pose_path path/to/poses/Poses/
         TARGET_PATH: &target_path  src.models.slgcn.openhands.datasets.isolated.WLASLDataset
 
         # Set modality

@@ -1,16 +1,16 @@
-pretrained: new_models/NGT200/kfold_animics/1_2_3/T1/epoch=231-step=10440.ckpt
+pretrained: new_models/set_model.ckpt
 data:
     variables:
-        MODEL_NAME: &model_name 1_2_3_test_1
-        PROJECT_NAME: &project_name NGT200
+        MODEL_NAME: &model_name slgcn
+        PROJECT_NAME: &project_name slgcn
 
         # Set Data paths
-        OUTPUT_PATH: &output_path new_models/NGT200/1_2_3/T1/f/
-        DATA_PATH: &data_path training_data/NGT/metadata/kfold/test/T1_f.json
-        POSE_PATH: &pose_path training_data/NGT/Poses/
-        TARGET_PATH: &target_path  openhands.datasets.isolated.WLASLDataset
+        OUTPUT_PATH: &output_path new_models/
+        DATA_PATH: &data_path data/metadata_kfold/1_2_3/T1/metadata_fold_2.json
+        POSE_PATH: &pose_path data/Poses/
+        TARGET_PATH: &target_path  src.models.slgcn.openhands.datasets.isolated.WLASLDataset
 
-        RESULT_PATH: &result_path results/NGT200/kfold_animics/1_2_3/T1/f/_1.jsonl
+        RESULT_PATH: &result_path results/slgcn/_1.jsonl
         
         # Set modality
         MOD: &modality "pose"
