@@ -1,6 +1,9 @@
 wandb
 *.ckpt
 backup
+datasets/
+
+data/
 logs
 
 # Byte-compiled / optimized / DLL files
