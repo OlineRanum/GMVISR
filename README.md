@@ -79,7 +79,10 @@ pip3 install pytorch_lightning==1.8.6
 pip3 install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-1.13.1+cu117.html
 ```
 
-
+To train and evaluate the temporal-PONITA run
+``` 
+python run_temporal_ponita.py
+```
 
 ## License and Citation
 - **License**: The NGT200 dataset is released under a CC BY 4.0 license. 
