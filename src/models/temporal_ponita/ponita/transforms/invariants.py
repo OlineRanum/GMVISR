@@ -1,7 +1,7 @@
 import torch
 from torch_geometric.transforms import BaseTransform
-from models.temporal_ponita.ponita.geometry.invariants import invariant_attr_r2s1_fiber_bundle, invariant_attr_r2s1_point_cloud
-from models.temporal_ponita.ponita.geometry.invariants import invariant_attr_rn, invariant_attr_r3s2_fiber_bundle, invariant_attr_r3s2_point_cloud
+from src.models.temporal_ponita.ponita.geometry.invariants import invariant_attr_r2s1_fiber_bundle, invariant_attr_r2s1_point_cloud
+from src.models.temporal_ponita.ponita.geometry.invariants import invariant_attr_rn, invariant_attr_r3s2_fiber_bundle, invariant_attr_r3s2_point_cloud
 
 
 class SEnInvariantAttributes(BaseTransform):

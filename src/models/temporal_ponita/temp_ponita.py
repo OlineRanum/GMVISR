@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from ponita.models.ponita import PonitaFiberBundle
+from src.models.temporal_ponita.ponita.models.ponita import PonitaFiberBundle
 
 
 

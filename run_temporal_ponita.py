@@ -1,3 +1,5 @@
+
+
 import argparse
 import os
 from functools import partial
@@ -5,11 +7,11 @@ from functools import partial
 import wandb
 import torch
 import pytorch_lightning as pl
-from models.temporal_ponita.lightning_wrappers.callbacks import EMA, EpochTimer
-from models.temporal_ponita.lightning_wrappers.isr import PONITA_ISR
+from src.models.temporal_ponita.lightning_wrappers.callbacks import EMA, EpochTimer
+from src.models.temporal_ponita.lightning_wrappers.isr import PONITA_ISR
 
-from models.temporal_ponita.datasets.isr.pyg_dataloader_isr import ISRDataReader
-from models.temporal_ponita.datasets.isr.pyg_dataloader_isr import ISRDataLoader
+from src.models.temporal_ponita.datasets.pyg_dataloader_isr import ISRDataLoader, ISRDataReader
+
 
 
 # TODO: do we need this?
@@ -164,11 +166,11 @@ if __name__ == "__main__":
                         help='size of 1D conv stride')    
     
     # ISR Dataset settings
-    parser.add_argument('--root', type=str, default="datasets/isr",
+    parser.add_argument('--root', type=str, default="data",
                         help='Data set location')
-    parser.add_argument('--root_metadata', type=str, default="NGT/kfold_handshapes/1_2_3/T1/metadata_fold_1.json",
+    parser.add_argument('--root_metadata', type=str, default="metadata_kfold/1_2_3/T1/metadata_fold_2.json",
                         help='Metadata json file location')
-    parser.add_argument('--root_poses', type=str, default="NGT/Poses",
+    parser.add_argument('--root_poses', type=str, default="Poses",
                         help='Pose data dir location')
     parser.add_argument('--n_classes', type=str, default=198,
                         help='Number of sign classes')

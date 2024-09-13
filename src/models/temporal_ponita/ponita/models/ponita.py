@@ -4,12 +4,12 @@ from torch_geometric.nn import global_add_pool
 from torch_geometric.transforms import Compose
 from torch_scatter import scatter_mean
 from torch_geometric.transforms import BaseTransform, Compose, RadiusGraph
-from models.temporal_ponita.ponita.utils.to_from_sphere import sphere_to_scalar, sphere_to_vec
-from models.temporal_ponita.ponita.nn.embedding import PolynomialFeatures
-from models.temporal_ponita.ponita.utils.windowing import PolynomialCutoff
-from models.temporal_ponita.ponita.transforms import PositionOrientationGraph, SEnInvariantAttributes
-from models.temporal_ponita.ponita.nn.conv import Conv, FiberBundleConv
-from models.temporal_ponita.ponita.nn.convnext import ConvNext
+from src.models.temporal_ponita.ponita.utils.to_from_sphere import sphere_to_scalar, sphere_to_vec
+from src.models.temporal_ponita.ponita.nn.embedding import PolynomialFeatures
+from src.models.temporal_ponita.ponita.utils.windowing import PolynomialCutoff
+from src.models.temporal_ponita.ponita.transforms import PositionOrientationGraph, SEnInvariantAttributes
+from src.models.temporal_ponita.ponita.nn.conv import Conv, FiberBundleConv
+from src.models.temporal_ponita.ponita.nn.convnext import ConvNext
 
 
 # Wrapper to automatically switch between point cloud mode (num_ori = -1 or 0) and

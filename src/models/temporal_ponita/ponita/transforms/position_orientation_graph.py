@@ -2,9 +2,9 @@ import torch
 from torch_geometric.transforms import BaseTransform, RadiusGraph
 from torch_geometric.typing import SparseTensor
 from torch_geometric.utils import coalesce, remove_self_loops, add_self_loops
-from models.temporal_ponita.ponita.geometry.rotation import uniform_grid_s2, random_matrix
-from models.temporal_ponita.ponita.geometry.rotation_2d import uniform_grid_s1, random_so2_matrix
-from models.temporal_ponita.ponita.utils.to_from_sphere import scalar_to_sphere, vec_to_sphere
+from src.models.temporal_ponita.ponita.geometry.rotation import uniform_grid_s2, random_matrix
+from src.models.temporal_ponita.ponita.geometry.rotation_2d import uniform_grid_s1, random_so2_matrix
+from src.models.temporal_ponita.ponita.utils.to_from_sphere import scalar_to_sphere, vec_to_sphere
 import torch_geometric
 
 
