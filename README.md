@@ -48,6 +48,7 @@ The experiments in sections 4 and 5 are conducted using the SL-GCN.
 To reproduce the experiments using the SLGCN please install the following environment:
 
 ``` Install environment SLGCN
+conda env create -f src/models/slgcn/setup/env.yml
 ```
 
 
