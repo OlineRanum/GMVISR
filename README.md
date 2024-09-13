@@ -43,15 +43,27 @@ To reproduce the experiments of the NGT200 paper please download the pose- and m
 
 The experiments in sections 4 and 5 are conducted using the SL-GCN.
 
-#### SetUP
+#### SetUp
 
 To reproduce the experiments using the SLGCN please install the following environment:
 
 ``` Install environment SLGCN
 conda env create -f src/models/slgcn/setup/env.yml
+conda activate openhands
 ```
 
+#### Run Experiments
 
+To train the SLGCN run
+
+``` 
+python train_slgcn.py
+```
+
+To evaluate the SLGCN run
+``` 
+python test_slgcn.py
+```
 
 ### Reproduction of experiments Section 6 (Geometric)
 
