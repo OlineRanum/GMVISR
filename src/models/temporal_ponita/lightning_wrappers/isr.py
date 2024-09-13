@@ -1,13 +1,13 @@
 import pytorch_lightning as pl
 import torch
 import torch.nn as nn
-from ponita.models.ponita import Ponita
+from models.temporal_ponita.ponita.models.ponita import Ponita
 import torchmetrics
 import numpy as np
 from .scheduler import CosineWarmupScheduler
-from ponita.transforms.random_rotate import RandomRotate
+from models.temporal_ponita.ponita.transforms.random_rotate import RandomRotate
 import os
-from ponita.models.temporal_ponita import TemporalPonita
+from models.temporal_ponita.temp_ponits import TemporalPonita
 
 
 class PONITA_ISR(pl.LightningModule):
