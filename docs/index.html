@@ -151,43 +151,134 @@
   <div class="container">
     <h2>Results</h2>
 
-    <h3>Multi-View vs. Single-View</h3>
+    <h3>Single-View Training Fails to Generalise (SL-GCN)</h3>
     <p>
-      Models trained solely on frontal views fail to generalise to side views, confirming that
-      MV-ISR is a genuinely distinct task from SV-ISR that cannot be solved by single-view scaling.
+      A model trained on only one viewpoint achieves near-chance performance when tested on a different
+      view. Adding more frontal data from SignBank (S<sub>b</sub>) marginally improves frontal accuracy
+      but does not recover side-view performance, confirming that MV-ISR is a genuinely distinct task
+      from single-view ISR.
     </p>
-
-    <h3>Temporal-PONITA vs. SL-GCN Baseline</h3>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th>Model</th>
-            <th>Training views</th>
-            <th class="num">Top-1 Left</th>
-            <th class="num">Top-1 Front</th>
-            <th class="num">Top-1 Right</th>
+            <th>Training view</th>
+            <th class="num">Test Left</th>
+            <th class="num">Test Front</th>
+            <th class="num">Test Right</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>SL-GCN</td><td>Front only</td>
-            <td class="num">0.09</td><td class="num">0.49</td><td class="num">0.23</td>
-          </tr>
-          <tr>
-            <td>SL-GCN</td><td>All 3 views</td>
-            <td class="num">0.46</td><td class="num">0.49</td><td class="num">0.47</td>
-          </tr>
-          <tr class="highlight">
-            <td>Temporal-PONITA</td><td>All 3 views</td>
-            <td class="num">0.54</td><td class="num">0.59</td><td class="num">0.55</td>
-          </tr>
+          <tr><td>Left only</td>             <td class="num"><strong>.05</strong></td><td class="num">.03</td><td class="num">.01</td></tr>
+          <tr><td>Right only</td>            <td class="num">.02</td><td class="num">.03</td><td class="num"><strong>.06</strong></td></tr>
+          <tr><td>Front only</td>            <td class="num">.03</td><td class="num"><strong>.09</strong></td><td class="num">.03</td></tr>
+          <tr><td>Front + SignBank</td>      <td class="num">.06</td><td class="num"><strong>.20</strong></td><td class="num">.05</td></tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:0.85rem; color: var(--muted); margin-top:0.4rem;">
-      Temporal-PONITA improves over SL-GCN by 8–22% across view conditions and converges
-      40% faster (145 vs. 357 epochs).
+    <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Top-1 accuracy. Bold = best test view for that training condition. All human signers (IDs 1, 2, 3 + avatar A).</p>
+
+    <h3>Multi-View Training (SL-GCN)</h3>
+    <p>
+      Training on combinations of views substantially improves generalisation. Using all three views
+      together yields the best results across every test condition.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Training views</th>
+            <th class="num">Test Left</th>
+            <th class="num">Top-3 Left</th>
+            <th class="num">Test Front</th>
+            <th class="num">Top-3 Front</th>
+            <th class="num">Test Right</th>
+            <th class="num">Top-3 Right</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Left + Front</td>   <td class="num">.25</td><td class="num">.51</td><td class="num">.35</td><td class="num">.59</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>Left + Right</td>   <td class="num">.27</td><td class="num">.47</td><td class="num">—</td><td class="num">—</td><td class="num">.28</td><td class="num">.51</td></tr>
+          <tr><td>Front + Right</td>  <td class="num">—</td><td class="num">—</td><td class="num">.42</td><td class="num">.67</td><td class="num">.39</td><td class="num">.62</td></tr>
+          <tr class="highlight"><td>All 3 views</td><td class="num">.46</td><td class="num">.69</td><td class="num">.49</td><td class="num">.74</td><td class="num">.47</td><td class="num">.72</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Effect of Synthetic Data (SL-GCN, novel signer)</h3>
+    <p>
+      When training on signers 1 &amp; 2 and testing on unseen signer 3, synthetic avatar data provides
+      substantial gains. Combining 3-view avatar data with SignBank frontal views achieves the best
+      novel-signer performance.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Training data</th>
+            <th class="num">Test Left (S3)</th>
+            <th class="num">Test Front (S3)</th>
+            <th class="num">Test Right (S3)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>3-view, signers 1+2 only</td>                    <td class="num">.03</td><td class="num">.14</td><td class="num">.14</td></tr>
+          <tr><td>+ 1-view avatar</td>                             <td class="num">.22</td><td class="num">.27</td><td class="num">.09</td></tr>
+          <tr><td>+ SignBank frontal</td>                           <td class="num">.10</td><td class="num">.28</td><td class="num">.26</td></tr>
+          <tr><td>+ 3-view avatar</td>                             <td class="num">.19</td><td class="num">.43</td><td class="num">.38</td></tr>
+          <tr class="highlight"><td>+ 3-view avatar + SignBank</td><td class="num">.32</td><td class="num">.48</td><td class="num">.43</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Accuracies averaged over 10 runs. Novel signer (ID 3) held out from training entirely.</p>
+
+    <h3>Temporal-PONITA vs. SL-GCN</h3>
+    <p>
+      Temporal-PONITA consistently outperforms SL-GCN across all view combinations, with absolute
+      gains of <strong>+8% to +22%</strong>. The equivariant model also converges significantly faster
+      despite higher per-epoch compute cost.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Training views</th>
+            <th>Test view</th>
+            <th class="num">SL-GCN Top-1</th>
+            <th class="num">PONITA Top-1</th>
+            <th class="num">Gain</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Left + Front</td>  <td>Left</td>  <td class="num">.25</td><td class="num">.43</td><td class="num" style="color:#2e6b3e">+.18</td></tr>
+          <tr><td>Left + Right</td>  <td>Left</td>  <td class="num">.27</td><td class="num">.48</td><td class="num" style="color:#2e6b3e">+.21</td></tr>
+          <tr><td>Left + Front</td>  <td>Front</td> <td class="num">.35</td><td class="num">.55</td><td class="num" style="color:#2e6b3e">+.20</td></tr>
+          <tr><td>Front + Right</td> <td>Front</td> <td class="num">.42</td><td class="num">.57</td><td class="num" style="color:#2e6b3e">+.15</td></tr>
+          <tr><td>Left + Right</td>  <td>Right</td> <td class="num">.28</td><td class="num">.50</td><td class="num" style="color:#2e6b3e">+.22</td></tr>
+          <tr><td>Front + Right</td> <td>Right</td> <td class="num">.39</td><td class="num">.49</td><td class="num" style="color:#2e6b3e">+.10</td></tr>
+          <tr class="highlight"><td>All 3 views</td><td>Left</td>  <td class="num">.46</td><td class="num">.54</td><td class="num" style="color:#2e6b3e">+.08</td></tr>
+          <tr class="highlight"><td>All 3 views</td><td>Front</td> <td class="num">.49</td><td class="num">.59</td><td class="num" style="color:#2e6b3e">+.10</td></tr>
+          <tr class="highlight"><td>All 3 views</td><td>Right</td> <td class="num">.47</td><td class="num">.55</td><td class="num" style="color:#2e6b3e">+.08</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Training Efficiency</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th class="num">SL-GCN</th><th class="num">Temporal-PONITA</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Avg. time per epoch</td>  <td class="num">8.0 s</td>  <td class="num">11.5 s</td></tr>
+          <tr><td>Epochs to convergence</td><td class="num">357</td>    <td class="num">145</td></tr>
+          <tr class="highlight"><td>Total training time</td><td class="num">47 min</td><td class="num">28 min</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">
+      Despite higher per-epoch cost, Temporal-PONITA is ~40% faster overall due to faster convergence
+      and more stable training (lower variance across runs).
     </p>
   </div>
 </section>
