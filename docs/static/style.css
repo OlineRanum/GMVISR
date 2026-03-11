@@ -156,6 +156,43 @@ pre.bibtex {
   white-space: pre;
 }
 
+/* ── Research Question Cards ──────────────────────────────── */
+.rq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.rq-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+.rq-label {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.rq-text {
+  font-size: 0.88rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  line-height: 1.45;
+}
+.rq-answer {
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+@media (max-width: 600px) {
+  .rq-grid { grid-template-columns: 1fr; }
+}
+
 /* ── Footer ───────────────────────────────────────────────── */
 footer {
   text-align: center; padding: 2rem 0;

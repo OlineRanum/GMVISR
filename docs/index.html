@@ -150,8 +150,37 @@
 <section>
   <div class="container">
     <h2>Results</h2>
+    <p>
+      Our experiments are structured around four research questions, each probing a different aspect of
+      multi-view isolated sign recognition. Together they establish that MV-ISR is a distinct task from
+      single-view ISR, that geometry-aware models provide a strong path forward, and that synthetic data
+      can meaningfully close the data gap.
+    </p>
 
-    <h3>Single-View Training Fails to Generalise (SL-GCN)</h3>
+    <div class="rq-grid">
+      <div class="rq-card">
+        <div class="rq-label">Q1</div>
+        <div class="rq-text"><em>Does viewing angle matter in pose-based ISR?</em></div>
+        <div class="rq-answer">Yes — a model trained on one view drops to near-chance on another view.</div>
+      </div>
+      <div class="rq-card">
+        <div class="rq-label">Q2</div>
+        <div class="rq-text"><em>How does including more views during training affect performance?</em></div>
+        <div class="rq-answer">Consistently better. All-3-view training reaches .46/.49/.47 Top-1 across views.</div>
+      </div>
+      <div class="rq-card">
+        <div class="rq-label">Q3</div>
+        <div class="rq-text"><em>Can synthetic data boost MV-ISR performance for novel signers?</em></div>
+        <div class="rq-answer">Yes — combining 3-view avatar data with SignBank raises novel-signer accuracy to .32/.48/.43.</div>
+      </div>
+      <div class="rq-card">
+        <div class="rq-label">Q4</div>
+        <div class="rq-text"><em>Is a geometrically grounded model viable for ISR?</em></div>
+        <div class="rq-answer">Yes — SE(2)-equivariant Temporal-PONITA gains +8% to +22% over SL-GCN and trains 40% faster.</div>
+      </div>
+    </div>
+
+    <h3>Q1 &amp; Q2 — Viewing Angle and Multi-View Training (SL-GCN)</h3>
     <p>
       A model trained on only one viewpoint achieves near-chance performance when tested on a different
       view. Adding more frontal data from SignBank (S<sub>b</sub>) marginally improves frontal accuracy
@@ -178,11 +207,10 @@
     </div>
     <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Top-1 accuracy. Bold = best test view for that training condition. All human signers (IDs 1, 2, 3 + avatar A).</p>
 
-    <h3>Multi-View Training (SL-GCN)</h3>
-    <p>
-      Training on combinations of views substantially improves generalisation. Using all three views
-      together yields the best results across every test condition.
-    </p>
+    <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Top-1 accuracy on single-view trained models. Bold = best test view for that training condition.</p>
+
+    <p>Training on combinations of views substantially improves generalisation. Using all three views
+    together yields the best results across every test condition.</p>
     <div class="table-wrap">
       <table>
         <thead>
@@ -205,7 +233,7 @@
       </table>
     </div>
 
-    <h3>Effect of Synthetic Data (SL-GCN, novel signer)</h3>
+    <h3>Q3 — Effect of Synthetic Data (SL-GCN, novel signer)</h3>
     <p>
       When training on signers 1 &amp; 2 and testing on unseen signer 3, synthetic avatar data provides
       substantial gains. Combining 3-view avatar data with SignBank frontal views achieves the best
@@ -232,7 +260,7 @@
     </div>
     <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Accuracies averaged over 10 runs. Novel signer (ID 3) held out from training entirely.</p>
 
-    <h3>Temporal-PONITA vs. SL-GCN</h3>
+    <h3>Q4 — Temporal-PONITA vs. SL-GCN: The Case for Geometric Models</h3>
     <p>
       Temporal-PONITA consistently outperforms SL-GCN across all view combinations, with absolute
       gains of <strong>+8% to +22%</strong>. The equivariant model also converges significantly faster
