@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NGT200 — Geometric Multi-View Isolated Sign Recognition</title>
+  <link rel="stylesheet" href="static/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────── -->
+<header>
+  <div class="container">
+    <div class="venue">GRaM @ ICML 2024</div>
+    <h1>The NGT200 Dataset:<br>Geometric Multi-View Isolated Sign Recognition</h1>
+    <p class="authors">
+      Oline Ranum &nbsp;·&nbsp; David Wessels &nbsp;·&nbsp; Gomèr Otterspeer &nbsp;·&nbsp;
+      Erik J. Bekkers &nbsp;·&nbsp; Floris Roelofsen &nbsp;·&nbsp; Jari I. Andersen
+    </p>
+    <p class="affiliations">SignLab Amsterdam &amp; AMLab, University of Amsterdam</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://openreview.net/forum?id=idkNzTC67X" target="_blank">
+        📄 Paper
+      </a>
+      <a class="btn btn-secondary" href="https://osf.io/5zuyd/" target="_blank">
+        🗄️ Dataset (OSF)
+      </a>
+      <a class="btn btn-secondary" href="https://github.com/OlineRanum/GMVISR" target="_blank">
+        💻 Code
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ── Context banner ──────────────────────────────────────── -->
+<div class="context-banner">
+  <div class="container">
+    <p>
+      Sign languages are three-dimensional, yet almost all recognition research operates on frontal-view 2D video.
+      We show that a model trained on a single frontal view loses <strong>over 50% relative accuracy</strong> when
+      tested on a side view — and that geometric, viewpoint-aware learning recovers this gap.
+    </p>
+  </div>
+</div>
+
+<!-- ── Abstract ────────────────────────────────────────────── -->
+<section>
+  <div class="container">
+    <h2>Abstract</h2>
+    <div class="abstract-box">
+      <p>Sign Language Processing (SLP) provides a foundation for a more inclusive future in language technology;
+      however, the field faces several significant challenges that must be addressed to achieve practical,
+      real-world applications. This work addresses <strong>multi-view isolated sign recognition (MV-ISR)</strong>,
+      and highlights the essential role of 3D awareness and geometry in SLP systems. We introduce the
+      <strong>NGT200 dataset</strong>, a novel spatio-temporal multi-view benchmark, establishing MV-ISR as
+      distinct from single-view ISR (SV-ISR). We demonstrate the benefits of synthetic data and propose
+      conditioning sign representations on spatial symmetries inherent in sign language. Leveraging an
+      <strong>SE(2)-equivariant model improves MV-ISR performance by 8–22%</strong> over the baseline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Dataset ─────────────────────────────────────────────── -->
+<section>
+  <div class="container">
+    <h2>The NGT200 Dataset</h2>
+    <p>
+      NGT200 contains pose and video data for <strong>200 common NGT signs</strong> recorded from
+      three calibrated viewpoints (−25°, 0°, +25°) by 3 Deaf signers and a retargeted synthetic avatar,
+      yielding a multi-view benchmark designed explicitly for viewpoint-invariant sign recognition research.
+    </p>
+
+    <figure>
+      <img src="static/img/signCollect.png" alt="SignCollect recording setup" style="max-width:600px;">
+      <figcaption>
+        <strong>Recording setup.</strong> Each camera is positioned 4 metres from the signer,
+        with 25° separation between the three viewpoints. The setup uses the SignCollect platform.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="static/img/ST_clouds.png" alt="Spatio-temporal point clouds" style="max-width:700px;">
+      <figcaption>
+        <strong>Spatio-temporal point clouds</strong> extracted with MediaPipe Holistic from the front
+        and right viewpoints. White landmarks show a single frame; blue landmarks encode temporal
+        dynamics across multiple frames.
+      </figcaption>
+    </figure>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Signs</td><td>200 NGT glosses</td></tr>
+          <tr><td>Viewpoints</td><td>3 (left −25°, front 0°, right +25°)</td></tr>
+          <tr><td>Signers</td><td>3 Deaf human signers + 1 synthetic avatar</td></tr>
+          <tr><td>Landmarks</td><td>75 per frame (Holistic MediaPipe)</td></tr>
+          <tr><td>Modalities</td><td>Spatio-temporal pose, video</td></tr>
+          <tr><td>License</td><td>CC BY 4.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── Method ──────────────────────────────────────────────── -->
+<section>
+  <div class="container">
+    <h2>Method</h2>
+
+    <h3>Pose Graph Construction</h3>
+    <p>
+      Pose landmarks are downsampled to a 27-node graph (10 nodes per hand, 7 for overall body position)
+      with spatial edges approximating the human skeletal structure. The graph is used as input to both
+      the SL-GCN baseline and the proposed Temporal-PONITA model.
+    </p>
+
+    <figure>
+      <img src="static/img/st-graph.png" alt="Reduced spatial graph" style="max-width:420px;">
+      <figcaption>
+        <strong>Reduced spatial graph.</strong> 27-node skeleton with approximate bone-structure edges,
+        used as input to both model architectures.
+      </figcaption>
+    </figure>
+
+    <h3>Temporal-PONITA: SE(2)-Equivariant Sign Recognition</h3>
+    <p>
+      We propose Temporal-PONITA, an extension of the PONITA architecture augmented with temporal
+      convolution modules. By conditioning representations on SE(2) spatial symmetries
+      (rotations and translations in the image plane), the model reduces the learning burden imposed
+      by viewpoint variation and inter-signer differences.
+    </p>
+
+    <figure>
+      <img src="static/img/Ponita.png" alt="Temporal-PONITA architecture" style="max-width:650px;">
+      <figcaption>
+        <strong>Temporal-PONITA architecture.</strong> Input features are embedded with a linear layer,
+        then passed through <em>L</em> temporal-PONITA layers each containing one ConvNeXt block and
+        one temporal block (two convolutional layers with GeLU activations).
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ── Results ─────────────────────────────────────────────── -->
+<section>
+  <div class="container">
+    <h2>Results</h2>
+
+    <h3>Multi-View vs. Single-View</h3>
+    <p>
+      Models trained solely on frontal views fail to generalise to side views, confirming that
+      MV-ISR is a genuinely distinct task from SV-ISR that cannot be solved by single-view scaling.
+    </p>
+
+    <h3>Temporal-PONITA vs. SL-GCN Baseline</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Training views</th>
+            <th class="num">Top-1 Left</th>
+            <th class="num">Top-1 Front</th>
+            <th class="num">Top-1 Right</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SL-GCN</td><td>Front only</td>
+            <td class="num">0.09</td><td class="num">0.49</td><td class="num">0.23</td>
+          </tr>
+          <tr>
+            <td>SL-GCN</td><td>All 3 views</td>
+            <td class="num">0.46</td><td class="num">0.49</td><td class="num">0.47</td>
+          </tr>
+          <tr class="highlight">
+            <td>Temporal-PONITA</td><td>All 3 views</td>
+            <td class="num">0.54</td><td class="num">0.59</td><td class="num">0.55</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color: var(--muted); margin-top:0.4rem;">
+      Temporal-PONITA improves over SL-GCN by 8–22% across view conditions and converges
+      40% faster (145 vs. 357 epochs).
+    </p>
+  </div>
+</section>
+
+<!-- ── Citation ────────────────────────────────────────────── -->
+<section>
+  <div class="container">
+    <h2>Citation</h2>
+<pre class="bibtex">@inproceedings{ranum2024ngt200,
+  title     = {The NGT200 Dataset: Geometric Multi-View Isolated Sign Recognition},
+  author    = {Ranum, Oline and Wessels, David and Otterspeer, Gom{\`e}r and
+               Bekkers, Erik J. and Roelofsen, Floris and Andersen, Jari I.},
+  booktitle = {Proceedings of the GRaM Workshop at the 41st International
+               Conference on Machine Learning (ICML)},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {251},
+  publisher = {PMLR},
+  year      = {2024},
+  url       = {https://openreview.net/forum?id=idkNzTC67X}
+}</pre>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <p>SignLab Amsterdam &amp; AMLab, University of Amsterdam &nbsp;·&nbsp; 2024</p>
+  </div>
+</footer>
+
+</body>
+</html>
