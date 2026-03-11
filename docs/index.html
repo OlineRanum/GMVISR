@@ -291,23 +291,6 @@
       </table>
     </div>
 
-    <h3>Training Efficiency</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Metric</th><th class="num">SL-GCN</th><th class="num">Temporal-PONITA</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Avg. time per epoch</td>  <td class="num">8.0 s</td>  <td class="num">11.5 s</td></tr>
-          <tr><td>Epochs to convergence</td><td class="num">357</td>    <td class="num">145</td></tr>
-          <tr class="highlight"><td>Total training time</td><td class="num">47 min</td><td class="num">28 min</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">
-      Despite higher per-epoch cost, Temporal-PONITA is ~40% faster overall due to faster convergence
-      and more stable training (lower variance across runs).
-    </p>
   </div>
 </section>
 
@@ -315,15 +298,12 @@
 <section>
   <div class="container">
     <h2>Citation</h2>
-<pre class="bibtex">@inproceedings{ranum2024ngt200,
-  title     = {The NGT200 Dataset: Geometric Multi-View Isolated Sign Recognition},
+<pre class="bibtex">@inproceedings{ranum2024the,
+  title     = {The {NGT}200 Dataset - Geometric Multi-View Isolated Sign Recognition},
   author    = {Ranum, Oline and Wessels, David and Otterspeer, Gom{\`e}r and
                Bekkers, Erik J. and Roelofsen, Floris and Andersen, Jari I.},
-  booktitle = {Proceedings of the GRaM Workshop at the 41st International
-               Conference on Machine Learning (ICML)},
-  series    = {Proceedings of Machine Learning Research},
-  volume    = {251},
-  publisher = {PMLR},
+  booktitle = {ICML 2024 Workshop on Geometry-grounded Representation Learning
+               and Generative Modeling},
   year      = {2024},
   url       = {https://openreview.net/forum?id=idkNzTC67X}
 }</pre>
