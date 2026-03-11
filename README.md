@@ -1,5 +1,6 @@
 # The NGT200 Dataset: Geometric Multi-View Isolated Sign Recognition
 
+[![Project Page](https://img.shields.io/badge/Project%20Page-olineranum.github.io%2FGMVISR-brightgreen)](https://olineranum.github.io/GMVISR/)
 [![GRaM @ ICML 2024](https://img.shields.io/badge/ICML%202024-GRaM%20Workshop-blue)](https://openreview.net/forum?id=idkNzTC67X)
 [![Dataset](https://img.shields.io/badge/Dataset-OSF-green)](https://osf.io/5zuyd/)
 [![License](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
