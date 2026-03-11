@@ -3,6 +3,8 @@ wandb
 backup
 datasets/
 
+private/
+
 data/
 logs
 
